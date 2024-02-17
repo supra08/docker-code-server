@@ -3,7 +3,7 @@ FROM ghcr.io/linuxserver/baseimage-ubuntu:jammy
 # set version label
 ARG BUILD_DATE
 ARG VERSION
-ARG CODE_RELEASE
+ARG CODE_RELEASE=4.21.0
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="aptalca"
 
