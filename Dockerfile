@@ -31,13 +31,13 @@ RUN apt-get install -y \
     openjdk-11-jdk \ 
     openjdk-8-jdk
 
-# Install Java 21 LTS
-RUN wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb && \
-    apt install -y /jdk-21_linux-x64_bin.deb
+# # Install Java 21 LTS
+# RUN wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb && \
+#     apt install -y /jdk-21_linux-x64_bin.deb
 
-# Install Java 20
-RUN wget https://download.oracle.com/java/20/archive/jdk-20.0.2_linux-x64_bin.deb && \
-    apt install -y /jdk-20.0.2_linux-x64_bin.deb
+# # Install Java 20
+# RUN wget https://download.oracle.com/java/20/archive/jdk-20.0.2_linux-x64_bin.deb && \
+#     apt install -y /jdk-20.0.2_linux-x64_bin.deb
 
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 
@@ -69,15 +69,15 @@ RUN sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key 
     sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list' && \
     apt-get update && apt-get install -y dart
 
+
 # Add Dart SDK to PATH
 ENV PATH="$PATH:/usr/lib/dart/bin"
 
 # Install FVM
-RUN /usr/bin/dart pub global activate fvm
+RUN /usr/bin/dart pub global activate fvm && cp /config/.pub-cache/bin/fvm /usr/bin/fvm
 
 # Add FVM to PATH
-ENV PATH="$PATH:/config/.pub-cache/bin"
-
+# ENV PATH="$PATH:/config/.pub-cache/bin" 
 
 # RUN fvm default stable
 
