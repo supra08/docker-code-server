@@ -45,6 +45,8 @@ ENV ANDROID_DOWNLOAD_PATH=/root \
     ANDROID_HOME=/opt/android \
     ANDROID_TOOL_HOME=/opt/android/cmdline-tools
 
+RUN echo "abc ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 USER abc
 
 RUN wget -O tools.zip https://dl.google.com/android/repository/${SDK_VERSION}.zip && \

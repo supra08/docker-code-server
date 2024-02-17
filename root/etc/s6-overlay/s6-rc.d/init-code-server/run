@@ -2,11 +2,11 @@
 
 mkdir -p /config/{extensions,data,workspace,.ssh}
 
-echo "setting up sudo access"
-if ! grep -q 'abc' /etc/sudoers; then
-    echo "adding abc to sudoers with NOPASSWD"
-    echo "abc ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
-fi
+# echo "setting up sudo access"
+# if ! grep -q 'abc' /etc/sudoers; then
+#     echo "adding abc to sudoers with NOPASSWD"
+#     echo "abc ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+# fi
 
 # if [ -n "${SUDO_PASSWORD}" ] || [ -n "${SUDO_PASSWORD_HASH}" ]; then
 #     echo "setting up sudo access"
