@@ -75,7 +75,6 @@ ENV PATH="$PATH:/config/fvm/versions/stable/bin"
 # Confirm installations
 RUN flutter --version
 
-RUN echo "abc ALL=\(root\)) NOPASSWD:ALL" >> /etc/sudoers
 # RUN chown -R abc:abc /opt/android
 # RUN chmod -R 755 /opt/android
 
@@ -112,6 +111,8 @@ RUN \
     /tmp/* \
     /var/lib/apt/lists/* \
     /var/tmp/*
+
+RUN echo "abc ALL=\(root\)) NOPASSWD:ALL" >> /etc/sudoers
 
 # add local files
 COPY /root /
