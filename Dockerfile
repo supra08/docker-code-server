@@ -46,8 +46,8 @@ ENV ANDROID_DOWNLOAD_PATH=/config \
     ANDROID_TOOL_HOME=/opt/android/cmdline-tools
 
 RUN echo "abc ALL=\(root\)) NOPASSWD:ALL" >> /etc/sudoers &&\
-    chown abc:abc /config
-    # chown abc:abc /opt/android
+    chown abc:abc /config && mkdir -p ${ANDROID_TOOL_HOME} &&\
+    chown abc:abc /opt/android
 
 USER abc
 
@@ -57,7 +57,6 @@ RUN wget -O tools.zip https://dl.google.com/android/repository/${SDK_VERSION}.zi
     unzip tools.zip && rm tools.zip && \
     chmod a+x -R ${ANDROID_DOWNLOAD_PATH} && \
     chown -R abc:abc ${ANDROID_DOWNLOAD_PATH} && \
-    mkdir -p ${ANDROID_TOOL_HOME} && \
     mv cmdline-tools ${ANDROID_TOOL_HOME}/tools
 
 ENV PATH=$PATH:${ANDROID_TOOL_HOME}/tools:${ANDROID_TOOL_HOME}/tools/bin
