@@ -46,8 +46,7 @@ ENV ANDROID_DOWNLOAD_PATH=/root \
     ANDROID_TOOL_HOME=/opt/android/cmdline-tools
 
 RUN echo "abc ALL=\(root\)) NOPASSWD:ALL" >> /etc/sudoers &&\
-    find /config -path /config/workspace -prune -o -exec chown abc:abc {} + &&\
-    chown abc:abc /config/workspace &&\
+    chown abc:abc /config &&\
     chown abc:abc /opt/android
 
 USER abc
