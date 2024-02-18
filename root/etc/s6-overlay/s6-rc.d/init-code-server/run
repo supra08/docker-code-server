@@ -38,5 +38,5 @@ if [ -n "$(ls -A /config/.ssh)" ]; then
 fi
 
 ip=$(ifconfig eth0 | grep 'inet' | cut -d: -f2 | awk '{ print $2}')
-socat tcp-listen:5554,bind=$ip,fork tcp:127.0.0.1:5554 &
-socat tcp-listen:5555,bind=$ip,fork tcp:127.0.0.1:5555 &
+socat TCP-LISTEN:8888,bind=$ip,fork TCP:127.0.0.1:8888
+socat TCP-LISTEN:9100,bind=$ip,fork TCP:127.0.0.1:9100
