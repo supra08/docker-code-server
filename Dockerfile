@@ -42,12 +42,12 @@ RUN apt-get install -y \
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 
 ENV ANDROID_DOWNLOAD_PATH=/config \
-    ANDROID_HOME=/opt/android \
-    ANDROID_TOOL_HOME=/opt/android/cmdline-tools
+    ANDROID_HOME=/config/android \
+    ANDROID_TOOL_HOME=/config/android/cmdline-tools
 
 RUN echo "abc ALL=\(root\)) NOPASSWD:ALL" >> /etc/sudoers &&\
     chown abc:abc /config && mkdir -p ${ANDROID_TOOL_HOME} &&\
-    chown abc:abc /opt/android
+    chown abc:abc /config/android
 
 USER abc
 
