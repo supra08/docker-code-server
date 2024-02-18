@@ -76,8 +76,8 @@ ENV PATH="$PATH:/config/fvm/versions/stable/bin"
 RUN flutter --version
 
 RUN echo "abc ALL=\(root\)) NOPASSWD:ALL" >> /etc/sudoers
-RUN chown -R abc:abc /usr/lib/android-sdk /opt/android
-RUN chmod -R 755 /usr/lib/android-sdk /opt/android
+RUN chown -R abc:abc /opt/android
+RUN chmod -R 755 /opt/android
 
 # USER abc
 
