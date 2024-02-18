@@ -56,53 +56,6 @@ RUN sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key 
     sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list' && \
     apt-get update && apt-get install -y dart
 
-USER abc
-
-WORKDIR /config
-
-RUN wget -O tools.zip https://dl.google.com/android/repository/${SDK_VERSION}.zip && \
-    unzip tools.zip && rm tools.zip && \
-    # chmod a+x -R ${ANDROID_DOWNLOAD_PATH} && \
-    # chown -R abc:abc ${ANDROID_DOWNLOAD_PATH} && \
-    mv cmdline-tools ${ANDROID_TOOL_HOME}/tools
-
-ENV PATH=$PATH:${ANDROID_TOOL_HOME}/tools:${ANDROID_TOOL_HOME}/tools/bin
-
-# https://askubuntu.com/questions/885658/android-sdk-repositories-cfg-could-not-be-loaded
-RUN mkdir -p ~/.android && \
-    touch ~/.android/repositories.cfg && \
-    echo y | sdkmanager "platform-tools" && \
-    echo y | sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION"
-
-ENV PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS_VERSION
-
-RUN yes | sdkmanager --licenses
-
-# Add Dart SDK to PATH
-ENV PATH="$PATH:/usr/lib/dart/bin"
-
-# Install FVM
-RUN /usr/bin/dart pub global activate fvm && cp /config/.pub-cache/bin/fvm /usr/bin/fvm
-
-# Add FVM to PATH
-# ENV PATH="$PATH:/config/.pub-cache/bin" 
-
-# RUN fvm default stable
-
-# Set Flutter path
-# ENV PATH "$PATH:`fvm flutter-path`"
-
-#******************************#
-
-RUN fvm install stable
-#RUN fvm use stable
-
-#ENV PATH="$PATH:/root/.fvm/default/bin"
-ENV PATH="$PATH:/config/fvm/versions/stable/bin"
-
-# Confirm installations
-RUN flutter --version
-
 RUN \
   echo "**** install runtime dependencies ****" && \
   apt-get update && \
@@ -132,6 +85,53 @@ RUN \
     /tmp/* \
     /var/lib/apt/lists/* \
     /var/tmp/*
+
+USER abc
+
+WORKDIR /config
+
+RUN wget -O tools.zip https://dl.google.com/android/repository/${SDK_VERSION}.zip && \
+    unzip tools.zip && rm tools.zip && \
+    # chmod a+x -R ${ANDROID_DOWNLOAD_PATH} && \
+    # chown -R abc:abc ${ANDROID_DOWNLOAD_PATH} && \
+    mv cmdline-tools ${ANDROID_TOOL_HOME}/tools
+
+ENV PATH=$PATH:${ANDROID_TOOL_HOME}/tools:${ANDROID_TOOL_HOME}/tools/bin
+
+# https://askubuntu.com/questions/885658/android-sdk-repositories-cfg-could-not-be-loaded
+RUN mkdir -p ~/.android && \
+    touch ~/.android/repositories.cfg && \
+    echo y | sdkmanager "platform-tools" && \
+    echo y | sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION"
+
+ENV PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS_VERSION
+
+RUN yes | sdkmanager --licenses
+
+# Add Dart SDK to PATH
+ENV PATH="$PATH:/usr/lib/dart/bin"
+
+# Install FVM
+RUN dart pub global activate fvm && cp /config/.pub-cache/bin/fvm /usr/bin/fvm
+
+# Add FVM to PATH
+# ENV PATH="$PATH:/config/.pub-cache/bin" 
+
+# RUN fvm default stable
+
+# Set Flutter path
+# ENV PATH "$PATH:`fvm flutter-path`"
+
+#******************************#
+
+RUN fvm install stable
+#RUN fvm use stable
+
+#ENV PATH="$PATH:/root/.fvm/default/bin"
+ENV PATH="$PATH:/config/fvm/versions/stable/bin"
+
+# Confirm installations
+RUN flutter --version
 
 # add local files
 COPY /root /
