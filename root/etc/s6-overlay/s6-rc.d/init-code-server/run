@@ -29,8 +29,8 @@ mkdir -p /config/{extensions,data,workspace,.ssh}
     cp /root/.profile /config/.profile
 
 # fix permissions (ignore contents of /config/workspace)
-# find /config -path /config/workspace -prune -o -exec chown abc:abc {} +
-# chown abc:abc /config/workspace
+find /config -path /config/workspace -prune -o -exec chown root:root {} +
+chown root:root /config/workspace
 # chown abc:abc /opt/android
 chmod 700 /config/.ssh
 if [ -n "$(ls -A /config/.ssh)" ]; then
