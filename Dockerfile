@@ -45,9 +45,14 @@ ENV ANDROID_DOWNLOAD_PATH=/root \
     ANDROID_HOME=/opt/android \
     ANDROID_TOOL_HOME=/opt/android/cmdline-tools
 
-RUN echo "abc ALL=\(root\)) NOPASSWD:ALL" >> /etc/sudoers
+RUN echo "abc ALL=\(root\)) NOPASSWD:ALL" >> /etc/sudoers &&\
+    find /config -path /config/workspace -prune -o -exec chown abc:abc {} + &&\
+    chown abc:abc /config/workspace &&\
+    chown abc:abc /opt/android
 
 USER abc
+
+WORKDIR /config
 
 RUN wget -O tools.zip https://dl.google.com/android/repository/${SDK_VERSION}.zip && \
     unzip tools.zip && rm tools.zip && \
