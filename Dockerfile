@@ -45,7 +45,7 @@ ENV ANDROID_DOWNLOAD_PATH=/root \
     ANDROID_HOME=/opt/android \
     ANDROID_TOOL_HOME=/opt/android/cmdline-tools
 
-RUN echo abc ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/abc && chmod 0440 /etc/sudoers.d/abc
+RUN echo "abc ALL=\(root\)) NOPASSWD:ALL" >> /etc/sudoers
 
 USER abc
 
