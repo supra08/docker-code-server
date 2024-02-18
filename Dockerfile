@@ -55,8 +55,8 @@ WORKDIR /config
 
 RUN wget -O tools.zip https://dl.google.com/android/repository/${SDK_VERSION}.zip && \
     unzip tools.zip && rm tools.zip && \
-    chmod a+x -R ${ANDROID_DOWNLOAD_PATH} && \
-    chown -R abc:abc ${ANDROID_DOWNLOAD_PATH} && \
+    # chmod a+x -R ${ANDROID_DOWNLOAD_PATH} && \
+    # chown -R abc:abc ${ANDROID_DOWNLOAD_PATH} && \
     mv cmdline-tools ${ANDROID_TOOL_HOME}/tools
 
 ENV PATH=$PATH:${ANDROID_TOOL_HOME}/tools:${ANDROID_TOOL_HOME}/tools/bin
