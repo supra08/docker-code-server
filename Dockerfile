@@ -68,8 +68,8 @@ RUN \
     libatomic1 \
     nano \
     net-tools \
-    netcat \
-    sudo && \
+    netcat && \
+    # sudo && \
   echo "**** install code-server ****" && \
   if [ -z ${CODE_RELEASE+x} ]; then \
     CODE_RELEASE=$(curl -sX GET https://api.github.com/repos/coder/code-server/releases/latest \
