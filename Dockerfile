@@ -51,6 +51,11 @@ RUN echo "abc ALL=\(root\)) NOPASSWD:ALL" >> /etc/sudoers &&\
     chmod a+x -R ${ANDROID_DOWNLOAD_PATH} && \
     chown -R abc:abc ${ANDROID_DOWNLOAD_PATH}
 
+# install flutter dependencies
+RUN sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -' && \
+    sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list' && \
+    apt-get update && apt-get install -y dart
+
 USER abc
 
 WORKDIR /config
@@ -72,12 +77,6 @@ RUN mkdir -p ~/.android && \
 ENV PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS_VERSION
 
 RUN yes | sdkmanager --licenses
-
-# install flutter dependencies
-RUN sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -' && \
-    sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list' && \
-    apt-get update && apt-get install -y dart
-
 
 # Add Dart SDK to PATH
 ENV PATH="$PATH:/usr/lib/dart/bin"
