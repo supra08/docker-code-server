@@ -91,6 +91,7 @@ RUN \
     libatomic1 \
     nano \
     sudo \
+    socat \
     net-tools \
     netcat && \
   echo "**** install code-server ****" && \
