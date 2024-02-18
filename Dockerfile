@@ -56,6 +56,9 @@ RUN sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key 
     sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list' && \
     apt-get update && apt-get install -y dart
 
+# Install FVM
+RUN /usr/bin/dart pub global activate fvm && cp /config/.pub-cache/bin/fvm /usr/bin/fvm
+
 RUN \
   echo "**** install runtime dependencies ****" && \
   apt-get update && \
@@ -110,9 +113,6 @@ RUN yes | sdkmanager --licenses
 
 # Add Dart SDK to PATH
 ENV PATH="$PATH:/usr/lib/dart/bin"
-
-# Install FVM
-RUN dart pub global activate fvm && cp /config/.pub-cache/bin/fvm /usr/bin/fvm
 
 # Add FVM to PATH
 # ENV PATH="$PATH:/config/.pub-cache/bin" 
