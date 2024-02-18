@@ -41,7 +41,7 @@ RUN apt-get install -y \
 
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 
-ENV ANDROID_DOWNLOAD_PATH=/root \
+ENV ANDROID_DOWNLOAD_PATH=/config \
     ANDROID_HOME=/opt/android \
     ANDROID_TOOL_HOME=/opt/android/cmdline-tools
 
