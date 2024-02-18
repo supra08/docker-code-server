@@ -47,7 +47,9 @@ ENV ANDROID_DOWNLOAD_PATH=/config \
 
 RUN echo "abc ALL=\(root\)) NOPASSWD:ALL" >> /etc/sudoers &&\
     chown abc:abc /config && mkdir -p ${ANDROID_TOOL_HOME} &&\
-    chown abc:abc /config/android
+    chown abc:abc /config/android &&\
+    chmod a+x -R ${ANDROID_DOWNLOAD_PATH} && \
+    chown -R abc:abc ${ANDROID_DOWNLOAD_PATH}
 
 USER abc
 
